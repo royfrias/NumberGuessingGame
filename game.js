@@ -22,7 +22,6 @@ async function guessNumber() {
   // if not it will log the invalid message
   if (isNaN(max) || max <= 1) {
     console.log(`Please enter a valid number greater then 1.`);
-    process.exit();
   }
 
   // we prompt the user to enter the secret number
@@ -39,7 +38,6 @@ async function guessNumber() {
   // the secretNumber picked falls between 1 and the max 
   if (isNaN(secretNumber) || secretNumber < 1 || secretNumber > max) {
     console.log(`Please enter a valid number between 1 and ${max}`);
-    process.exit();
   }
 
   // we loop through the game until we guess correctly
@@ -59,13 +57,11 @@ async function guessNumber() {
       if (higherOrLower.toLowerCase() === "h") {  // here we are checking for cheating and making sure the guess is >= to the secretNumber we then update the min to guess + 1
         if (guess >= secretNumber) {
           console.log( "Cheat detected! The guess was lower than or equal to the guess");
-          process.exit();
         }
         min = guess + 1;
       } else if (higherOrLower.toLowerCase() === "l") {  // here we are checking for cheating and making sure the guess is <= to the secretNumber we then update the max to guess - 1
         if (guess <= secretNumber) {
           console.log("Cheat detected! The guess was higher than or equal to the guess");
-          process.exit();
         }
         max = guess - 1;
       } else {
@@ -79,10 +75,10 @@ async function guessNumber() {
     // here we are checking if the range is wrong we then ask the user to try again.
     if (min > max) {
       console.log(`There is an error with the input. Please try again!`);
-      process.exit();
     }
   }
-  readlineInterface.close();
+  
+  process.exit();
 }
 guessNumber();
 
